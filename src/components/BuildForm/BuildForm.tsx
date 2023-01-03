@@ -3,24 +3,34 @@ import { Form, FormFieldContainer } from "../_atoms";
 import { MatchUpSelect } from "../MatchUpSelect";
 import { BuildOrderTextarea } from "../BuildOrderTextarea";
 
+import { trpc } from "../../utils/trpc";
+import { useRouter } from "next/router";
+
 export const BuildForm = () => {
-  const [matchUpState, setMatchUpState] = useState("");
-  const [buildOrderState, setBuildOrderState] = useState("");
+  const createBuildMutation = trpc.builds.submitBuild.useMutation();
+
+  const [matchUp, setMatchUp] = useState("");
+  const [buildOrder, setBuildOrder] = useState("");
+  const router = useRouter();
+  const handleSubmit = async () => {
+    await createBuildMutation.mutateAsync({ matchUp, buildOrder });
+    router.push("./builds");
+  };
 
   return (
-    <Form onSubmit={() => console.log({ matchUpState, buildOrderState })}>
+    <Form onSubmit={handleSubmit}>
       <h1>Submit a build order form</h1>
       <FormFieldContainer>
         <MatchUpSelect
-          onChange={(val) => setMatchUpState(val)}
-          value={matchUpState}
+          onChange={(val) => setMatchUp(val)}
+          value={matchUp}
           required
         />
       </FormFieldContainer>
       <FormFieldContainer>
         <BuildOrderTextarea
-          onChange={(val) => setBuildOrderState(val)}
-          value={buildOrderState}
+          onChange={(val) => setBuildOrder(val)}
+          value={buildOrder}
           required
         />
       </FormFieldContainer>
