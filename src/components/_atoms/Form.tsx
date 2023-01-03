@@ -11,6 +11,7 @@ export const Form: TForm = ({ children, onSubmit }) => {
     <form
       onSubmit={(e) => {
         e.preventDefault();
+
         onSubmit(e);
       }}
     >

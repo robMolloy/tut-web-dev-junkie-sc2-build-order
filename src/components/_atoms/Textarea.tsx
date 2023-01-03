@@ -12,7 +12,6 @@ type TTextarea = React.FC<{
 }>;
 
 export const Textarea: TTextarea = ({
-  children,
   onChange,
   value,
   label,
@@ -36,9 +35,7 @@ export const Textarea: TTextarea = ({
         }}
         value={currentValue}
         required={required}
-      >
-        {children}
-      </textarea>
+      />
     </>
   );
 };
