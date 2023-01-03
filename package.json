@@ -6,6 +6,7 @@
     "build": "next build",
     "dev": "next dev",
     "dev-db": "docker-compose up",
+    "dev-db-migrate": "npx prisma migrate dev", 
     "postinstall": "prisma generate",
     "lint": "next lint",
     "start": "next start"
